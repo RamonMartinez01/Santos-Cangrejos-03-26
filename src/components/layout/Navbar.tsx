@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, Github } from 'lucide-react';
+import { Menu, X, Github, Linkedin } from 'lucide-react';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,34 +13,39 @@ export const Navbar = () => {
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-[#555990]/20 bg-[#0F111A]/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        
+
         {/* Logo / Nombre */}
         <a href="#home" className="text-xl font-bold tracking-tighter text-[#9191E6] hover:brightness-110">
           Ramón<span className="text-slate-100">.</span>Martínez
         </a>
 
-        {/* Desktop Menu */}
-        <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-slate-400 transition-colors hover:text-[#9191E6]"
-            >
-              {link.name}
-            </a>
-          ))}
-          <a 
-            href="https://github.com/tu-usuario" 
-            target="_blank" 
+        {/* Iconos de Redes Sociales en Desktop */}
+        <div className="hidden items-center gap-3 md:flex">
+          {/* Botón GitHub */}
+          <a
+            href="https://github.com/RamonMartinez01"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full bg-[#555990]/20 p-2 text-slate-300 hover:bg-[#9191E6]/20 hover:text-[#9191E6] transition-all"
+            title="Visitar mi GitHub"
           >
             <Github size={20} />
+          </a>
+
+          {/* Botón LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/ramon-martinez-full-stack-developer/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full bg-[#555990]/20 p-2 text-slate-300 hover:bg-[#9191E6]/20 hover:text-[#9191E6] transition-all"
+            title="Visitar mi LinkedIn"
+          >
+            <Linkedin size={20} />
           </a>
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="text-slate-100 md:hidden"
           onClick={() => setIsOpen(!isOpen)}
         >
