@@ -42,17 +42,7 @@ export const ProjectCard = ({ project }: Props) => {
 
       {/* Enlaces / Footer de la Card */}
       <div className="mt-6 flex items-center gap-4 border-t border-[#555990]/20 pt-4">
-        {project.githubUrl && (
-          <a 
-            href={project.githubUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
-          >
-            <Github size={18} />
-            <span>Mi GitHub</span>
-          </a>
-        )}
+        
         
         {project.liveDemoUrl && (
           <a 
