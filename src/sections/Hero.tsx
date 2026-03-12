@@ -1,4 +1,4 @@
-import { ArrowRight, Terminal } from 'lucide-react';
+import { ArrowRight, Download, FileText, Terminal } from 'lucide-react';
 
 export const Hero = () => {
   return (
@@ -27,8 +27,8 @@ export const Hero = () => {
 
         {/* Descripción corta (Pitch) */}
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-slate-400 sm:text-xl">
-          En crecimiento para ser especialista en crear experiencias digitales fluidas con <span className="text-slate-200 font-medium">React.js y Next.js</span>. Y llevar las soluciones rapido a producción.<br/>
-          Entusiasta en proyectos full-stack, con ecosistemas backedn ya sea con <span className="text-slate-200 font-medium">FastAPI + SQLAlchemy + Uvicorn</span> o <span className="text-slate-200 font-medium">Node.js + Express + Sequelize</span>.
+          En crecimiento para ser especialista en crear experiencias digitales fluidas con <span className="text-slate-200 font-medium">React.js y Next.js</span>. Y llevar las soluciones rapido a producción.<br />
+          Entusiasta en proyectos full-stack, con ecosistemas backedn ya sea con <span className="text-slate-200 font-medium">FastAPI + SQLAlchemy</span> o <span className="text-slate-200 font-medium">Node.js + Express + Sequelize</span>.
         </p>
 
         {/* Botones de Acción (CTAs) */}
@@ -47,6 +47,33 @@ export const Hero = () => {
           >
             Hablemos
           </a>
+        </div>
+        <div className="mt-8 flex flex-col gap-4">
+          <p className="text-sm font-semibold uppercase tracking-wider text-slate-500">Descargar CV</p>
+
+          <div className="flex flex-wrap gap-3">
+            {/* Botón Español */}
+            <a
+              href="/Ramon-Martinez-CV26Esp.pdf"
+              download="CV_Ramon_Martinez_ES.pdf"
+              className="flex items-center gap-2 rounded-lg border border-[#555990]/40 bg-[#555990]/10 px-4 py-2 text-sm font-medium text-slate-200 transition-all hover:border-[#9191E6] hover:text-[#9191E6]"
+            >
+              <FileText size={18} />
+              Español
+              <Download size={14} className="opacity-50" />
+            </a>
+
+            {/* Botón Inglés */}
+            <a
+              href="/Ramon-Martinez-CV26Eng.pdf"
+              download="CV_Ramon_Martinez_EN.pdf"
+              className="flex items-center gap-2 rounded-lg border border-[#555990]/40 bg-[#555990]/10 px-4 py-2 text-sm font-medium text-slate-200 transition-all hover:border-[#9191E6] hover:text-[#9191E6]"
+            >
+              <FileText size={18} />
+              English
+              <Download size={14} className="opacity-50" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
