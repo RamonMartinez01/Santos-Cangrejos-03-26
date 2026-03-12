@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, X, Github, Linkedin, FileText, Download } from 'lucide-react';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Crea referencia al elemento nav para saber si el clic fue "adentro" o "afuera"
+  const navRef = useRef<HTMLElement>(null);
 
   const navLinks = [
     { name: 'Inicio', href: '#home' },
@@ -10,8 +13,41 @@ export const Navbar = () => {
     { name: 'Contacto', href: '#contact' },
   ];
 
+  // El useEffect se encarga de los "efectos secundarios" (los Event Listeners)
+  useEffect(() => {
+    // Función para cerrar si se hace clic fuera del menú
+    const handleClickOutside = (event: MouseEvent) => {
+      // Si el menú ESTÁ abierto, Y el clic NO fue dentro del <nav>...
+      if (isOpen && navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    // Función para cerrar si se hace scroll
+    const handleScroll = () => {
+      if (isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    // Añadimos los listeners solo si el menú está abierto
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      window.addEventListener('scroll', handleScroll);
+    }
+
+    // Función de limpieza (Cleanup): MUY IMPORTANTE
+    // React ejecuta esto al desmontar el componente o antes de volver a correr el efecto
+    // Evita fugas de memoria (memory leaks)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isOpen]); // El efecto se vuelve a ejecutar cada vez que isOpen cambia de estado
+
+
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-[#555990]/20 bg-[#0F111A]/80 backdrop-blur-md">
+    <nav ref={navRef} className="fixed top-0 z-50 w-full border-b border-[#555990]/20 bg-[#0F111A]/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
 
         {/* Logo / Nombre */}
