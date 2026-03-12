@@ -28,7 +28,7 @@ export const Hero = () => {
         {/* Descripción corta (Pitch) */}
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-slate-400 sm:text-xl">
           En crecimiento para ser especialista en crear experiencias digitales fluidas con <span className="text-slate-200 font-medium">React.js y Next.js</span>. Y llevar las soluciones rapido a producción.<br/>
-          Entusiasta en proyectos full-stack, con ecosistemas backedn ya sea con <span className="text-slate-200 font-medium">FastAPI + SQLAlchemy + Uvicorn</span> o <span className="text-slate-200 font-medium">Node.js + Express + Sequelize</span>.
+          Entusiasta en proyectos full-stack, con ecosistemas backedn ya sea con <span className="text-slate-200 font-medium">FastAPI + SQLAlchemy</span> o <span className="text-slate-200 font-medium">Node.js + Express + Sequelize</span>.
         </p>
 
         {/* Botones de Acción (CTAs) */}
