@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, Github, Linkedin } from 'lucide-react';
+import { Menu, X, Github, Linkedin, FileText, Download } from 'lucide-react';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,6 +67,30 @@ export const Navbar = () => {
                 {link.name}
               </a>
             ))}
+          </div>
+
+          <div className="flex flex-col flex-wrap gap-3 mt-3">
+            {/* Botón Español */}
+            <a
+              href="/Ramon-Martinez-CV26Esp.pdf"
+              download="CV_Ramon_Martinez_ES.pdf"
+              className="flex items-center gap-2 rounded-lg border border-[#555990]/40 bg-[#555990]/10 px-4 py-2 text-sm font-medium text-slate-200 transition-all hover:border-[#9191E6] hover:text-[#9191E6]"
+            >
+              <FileText size={18} />
+              CV-Español
+              <Download size={14} className="opacity-50" />
+            </a>
+
+            {/* Botón Inglés */}
+            <a
+              href="/Ramon-Martinez-CV26Eng.pdf"
+              download="CV_Ramon_Martinez_EN.pdf"
+              className="flex items-center gap-2 rounded-lg border border-[#555990]/40 bg-[#555990]/10 px-4 py-2 text-sm font-medium text-slate-200 transition-all hover:border-[#9191E6] hover:text-[#9191E6]"
+            >
+              <FileText size={18} />
+              CV-English
+              <Download size={14} className="opacity-50" />
+            </a>
           </div>
         </div>
       )}
