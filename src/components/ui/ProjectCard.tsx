@@ -1,5 +1,5 @@
 import type { Project } from '../../types';
-import { Github, ExternalLink, Zap } from 'lucide-react'; 
+import {  ExternalLink, Zap } from 'lucide-react'; 
 
 interface Props {
   project: Project;
@@ -42,7 +42,7 @@ export const ProjectCard = ({ project }: Props) => {
 
       {/* Enlaces / Footer de la Card */}
       <div className="mt-6 flex items-center gap-4 border-t border-[#555990]/20 pt-4">
-        
+      
         
         {project.liveDemoUrl && (
           <a 
