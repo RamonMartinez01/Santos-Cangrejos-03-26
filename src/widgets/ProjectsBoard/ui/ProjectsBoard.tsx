@@ -3,10 +3,10 @@ import { useProjects } from '../../../entities/Project/api/useProjects';
 import { ProjectCard } from '../../../entities/Project/ui/ProjectCard';
 
 export const ProjectsBoard = () => {
-    // Invocamos el hook (por ahora forzamos 'es', más adelante lo haremos dinámico)
-    const { data: projects = [], isLoading, error } = useProjects('es');
+    // Invoca el hook 
+    const { data: projects = [], isLoading, error } = useProjects();
 
-    // Extraemos el mensaje de error si existe
+    // Extrae el mensaje de error si existe
     const errorMessage = error instanceof Error ? error.message : null;
 
 

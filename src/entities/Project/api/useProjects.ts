@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '../../../shared/api/apiClient';
 import type { Project } from '../model/types';
+import { useLocaleStore } from '../../../shared/useLocaleStore';
 
 /**
  * Interfaz que refleja exactamente el envoltorio que nuestro 
@@ -18,7 +19,7 @@ interface ApiResponse {
  * Función fetcher (aislada para mantener el hook limpio).
  * Soporta la inyección del locale para nuestra arquitectura bilingüe.
  */
-const fetchProjects = async (locale: string = 'es'): Promise<Project[]> => {
+const fetchProjects = async (locale: string): Promise<Project[]> => {
     // El apiClient lanza el error automáticamente si el status no es 2xx
     const response = await apiClient.get<ApiResponse>(`/api-resplandor/projects?locale=${locale}`);
     
@@ -30,7 +31,10 @@ const fetchProjects = async (locale: string = 'es'): Promise<Project[]> => {
 /**
  * Custom Hook principal para consumir los proyectos.
  */
-export const useProjects = (locale: string = 'es') => {
+export const useProjects = () => {
+    // Extrae el idioma activo directamente del estado global de Zustand
+    const locale = useLocaleStore((state) => state.locale);
+
     return useQuery({
         // La queryKey es el identificador único en la caché.
         // Al incluir 'locale', le decimos a TanStack que si el idioma cambia, 
