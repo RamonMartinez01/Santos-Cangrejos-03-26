@@ -1,15 +1,15 @@
 // src/widgets/ProjectsBoard/ui/ProjectsBoard.tsx
-
-import type { Project } from '../../../entities/Project/model/types';
+import { useProjects } from '../../../entities/Project/api/useProjects';
 import { ProjectCard } from '../../../entities/Project/ui/ProjectCard';
 
-interface ProjectsBoardProps {
-    projects: Project[];
-    isLoading?: boolean;
-    error?: string | null;
-}
+export const ProjectsBoard = () => {
+    // Invocamos el hook (por ahora forzamos 'es', más adelante lo haremos dinámico)
+    const { data: projects = [], isLoading, error } = useProjects('es');
 
-export const ProjectsBoard = ({ projects, isLoading, error }: ProjectsBoardProps) => {
+    // Extraemos el mensaje de error si existe
+    const errorMessage = error instanceof Error ? error.message : null;
+
+
     return (
         <section id="projects" className="py-20">
             {/* Encabezado del Widget */}
@@ -31,9 +31,9 @@ export const ProjectsBoard = ({ projects, isLoading, error }: ProjectsBoardProps
                 </div>
             )}
 
-            {error && (
+            {errorMessage && (
                 <div className="py-8 px-6 rounded-xl border border-red-900/50 bg-red-900/20 text-red-200">
-                    <p>Error al cargar el portafolio: {error}</p>
+                    <p>Error al cargar el portafolio: {errorMessage}</p>
                 </div>
             )}
 
