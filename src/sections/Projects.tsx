@@ -1,5 +1,6 @@
-import { ProjectCard } from '../components/ui/ProjectCard';
-import { projects } from '../data/projects'; // Aquí es donde vive Yoin-Travel
+// src/sections/Projects.tsx
+//import { ProjectCard } from '../components/ui/ProjectCard';
+//import { projects } from '../data/projects'; // Aquí es donde vive Yoin-Travel
 
 export const Projects = () => {
   return (
@@ -18,9 +19,9 @@ export const Projects = () => {
 
       {/* Grid Responsivo */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
-        {projects.map((project) => (
+        {/*projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
-        ))}
+        ))*/}
       </div>
 
       {/* Mensaje sutil si tienes pocos proyectos por ahora */}
