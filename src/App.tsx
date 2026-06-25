@@ -1,5 +1,5 @@
 // src/App.tsx
-import { Navbar } from './components/layout/Navbar';
+import { Navbar } from '././widgets/Navbar';
 import { Hero } from './sections/Hero';
 import { Contact } from './sections/Contact';
 import { ProjectsBoard } from './widgets/ProjectsBoard';
