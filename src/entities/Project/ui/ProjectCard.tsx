@@ -17,8 +17,6 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         isFeatured 
     } = project;
 
-    console.log(project)
-
     return (
         <article className="flex flex-col h-full rounded-xl border border-slate-700/50 bg-slate-800/20 overflow-hidden transition-all duration-300 hover:border-slate-500/50 hover:bg-slate-800/40">
             {/* Cabecera visual (Opcional: solo si hay imagen) */}
