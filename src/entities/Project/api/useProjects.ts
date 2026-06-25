@@ -21,7 +21,7 @@ interface ApiResponse {
  */
 const fetchProjects = async (locale: string): Promise<Project[]> => {
     // El apiClient lanza el error automáticamente si el status no es 2xx
-    const response = await apiClient.get<ApiResponse>(`/api-resplandor/projects?locale=${locale}`);
+    const response = await apiClient.get<ApiResponse>(`/projects?locale=${locale}`);
     
     // Extraemos quirúrgicamente el array para que el frontend no tenga 
     // que lidiar con 'response.data.data'

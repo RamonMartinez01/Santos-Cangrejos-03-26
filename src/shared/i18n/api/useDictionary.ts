@@ -33,7 +33,7 @@ export const useDictionary = () => {
     return useQuery({
         queryKey: ['dictionary', locale],
         queryFn: async () => {
-            const response = await apiClient.get<DictionaryResponse>(`/api-resplandor/content/${locale}`);
+            const response = await apiClient.get<DictionaryResponse>(`/content/${locale}`);
             
             // Extrae directamente la sección de UI. 
             // Lanza un error si no viene, para que TanStack lo maneje.

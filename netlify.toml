@@ -1,0 +1,19 @@
+# netlify.toml
+
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+# Regla de Proxy Inverso para la API
+[[redirects]]
+  from = "/api-proxy/*"
+  to = "http://142.93.93.98/api-resplandor/:splat"
+  status = 200
+  force = true
+
+# Regla de fallback para React Router (Single Page Application)
+# Esto asegura que si el usuario recarga la página en /proyectos, Netlify no devuelva un 404
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
