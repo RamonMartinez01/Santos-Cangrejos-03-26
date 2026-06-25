@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Menu, X, Github, Linkedin, FileText, Download } from 'lucide-react';
+import { LocaleSwitcher } from '../../features/LocalSwitcher';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,6 +79,10 @@ export const Navbar = () => {
           >
             <Linkedin size={20} />
           </a>
+
+          <div>
+            < LocaleSwitcher/>
+          </div>
         </div>
 
         {/* Mobile Menu Button */}

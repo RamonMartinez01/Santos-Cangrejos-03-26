@@ -5,14 +5,15 @@
  * centralizing base URL configuration, headers, and error handling.
  */
 
-const API_BASE_URL =  import.meta.env.VITE_API_URL 
+const API_BASE_URL = import.meta.env.VITE_API_URL
 
 /**
- * Extended RequestInit interface to allow passing raw objects as body
- * which will be automatically stringified by the client.
+ * Extended Request options interface.
+ * We Omit the native 'body' from RequestInit to allow passing raw objects,
+ * which will be automatically formatted by the client.
  */
-interface RequestOptions extends RequestInit {
-    body?: any; 
+interface RequestOptions extends Omit<RequestInit, 'body'> {
+    body?: unknown; 
 }
 
 /**
@@ -24,40 +25,54 @@ interface RequestOptions extends RequestInit {
 async function fetchClient<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
     const { method = 'GET', headers, body, ...restOptions } = options;
 
-    // 1. Configure default headers
     const config: RequestInit = {
         method,
-        headers: {
-            'Content-Type': 'application/json',
-            ...headers, // Allows overriding default headers if needed
-        },
+        headers: { ...headers },
         ...restOptions,
     };
 
-    // 2. Automatically stringify JSON payloads if a body object is provided
-    if (body && typeof body !== 'string') {
+    // 1. Smart Body Formatting & Headers
+    // Si hay un body, no es una cadena y tampoco es FormData (para cuando subas imágenes)
+    if (body && typeof body !== 'string' && !(body instanceof FormData)) {
         config.body = JSON.stringify(body);
+        // Solo forzamos JSON si estamos enviando un objeto estándar
+        config.headers = {
+            'Content-Type': 'application/json',
+            ...config.headers
+        };
+    } else if (body instanceof FormData) {
+        config.body = body;
+        // El navegador se encarga del Content-Type para FormData
     }
 
     try {
-        // 3. Execute the network request
+        // 2. Execute the network request
         const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
 
-        // 4. Parse the JSON response
-        const data = await response.json();
+        // 3. Safe Parsing: Check what the server actually sent back
+        let data: any;
+        const contentType = response.headers.get('content-type');
 
-        // 5. Intercept HTTP error statuses (4xx, 5xx)
-        if (!response.ok) {
-            // Our backend sends { status: 'error', message: '...' }
-            // We throw the backend's message, or fallback to a generic status text
-            throw new Error(data.message || `HTTP Error: ${response.status} ${response.statusText}`);
+        if (contentType && contentType.includes('application/json')) {
+            data = await response.json();
+        } else {
+            // Fallback for HTML error pages from proxies like Nginx
+            data = await response.text();
         }
 
-        // 6. Return the raw parsed data to the Service layer
+        // 4. Intercept HTTP error statuses (4xx, 5xx)
+        if (!response.ok) {
+            // Extract message safely whether data is a JSON object or raw HTML text
+            const errorMessage = typeof data === 'object' && data?.message
+                ? data.message
+                : `HTTP Error: ${response.status} ${response.statusText}`;
+            throw new Error(errorMessage);
+        }
+
+        // 5. Return the successfully parsed data
         return data as T;
-        
+
     } catch (error) {
-        // Log the error globally for debugging, then propagate it to TanStack Query
         console.error(`[API Client Error] ${method} ${endpoint}:`, error);
         throw error;
     }
@@ -65,18 +80,17 @@ async function fetchClient<T>(endpoint: string, options: RequestOptions = {}): P
 
 /**
  * Exported API Client methods representing the CRUD operations.
- * These methods provide a cleaner API for the Service layer.
  */
 export const apiClient = {
-    get: <T>(endpoint: string, options?: RequestInit) => 
+    get: <T>(endpoint: string, options?: RequestOptions) => 
         fetchClient<T>(endpoint, { ...options, method: 'GET' }),
         
-    post: <T>(endpoint: string, body: any, options?: RequestInit) => 
+    post: <T>(endpoint: string, body: unknown, options?: RequestOptions) => 
         fetchClient<T>(endpoint, { ...options, body, method: 'POST' }),
         
-    patch: <T>(endpoint: string, body: any, options?: RequestInit) => 
+    patch: <T>(endpoint: string, body: unknown, options?: RequestOptions) => 
         fetchClient<T>(endpoint, { ...options, body, method: 'PATCH' }),
         
-    delete: <T>(endpoint: string, options?: RequestInit) => 
+    delete: <T>(endpoint: string, options?: RequestOptions) => 
         fetchClient<T>(endpoint, { ...options, method: 'DELETE' }),
 };

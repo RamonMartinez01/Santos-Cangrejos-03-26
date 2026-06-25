@@ -1,8 +1,8 @@
 // src/App.tsx
 import { Navbar } from './components/layout/Navbar';
 import { Hero } from './sections/Hero';
-import { Projects } from './sections/Projects';
 import { Contact } from './sections/Contact';
+import { ProjectsBoard } from './widgets/ProjectsBoard';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         
         {/* Un contenedor para dar aire a las secciones de contenido */}
         <div className="max-w-5xl mx-auto px-6 space-y-32 pb-20">
-          <Projects />
+          <ProjectsBoard />
           <Contact />
         </div>
       </main>
