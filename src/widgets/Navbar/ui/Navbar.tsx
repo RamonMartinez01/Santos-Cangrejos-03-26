@@ -50,22 +50,24 @@ export const Navbar = () => {
                 <a href="#home" className="text-xl font-bold tracking-tighter text-[#9191E6] hover:brightness-110">
                     Ramón<span className="text-slate-100">.</span>Martínez
                 </a>
-
-                <div className="hidden items-center gap-3 md:flex">
-                    <a href="https://github.com/RamonMartinez01" target="_blank" rel="noopener noreferrer" className="rounded-full bg-[#555990]/20 p-2 text-slate-300 hover:bg-[#9191E6]/20 hover:text-[#9191E6] transition-all">
-                        <Github size={20} />
-                    </a>
-                    <a href="https://www.linkedin.com/in/ramon-martinez-full-stack-developer/" target="_blank" rel="noopener noreferrer" className="rounded-full bg-[#555990]/20 p-2 text-slate-300 hover:bg-[#9191E6]/20 hover:text-[#9191E6] transition-all">
-                        <Linkedin size={20} />
-                    </a>
+                <div className='items-center gap-3 flex flex-row'>
                     <div>
                         <LocaleSwitcher />
                     </div>
-                </div>
+                    <div className="hidden items-center gap-3 md:flex">
+                        <a href="https://github.com/RamonMartinez01" target="_blank" rel="noopener noreferrer" className="rounded-full bg-[#555990]/20 p-2 text-slate-300 hover:bg-[#9191E6]/20 hover:text-[#9191E6] transition-all">
+                            <Github size={20} />
+                        </a>
+                        <a href="https://www.linkedin.com/in/ramon-martinez-full-stack-developer/" target="_blank" rel="noopener noreferrer" className="rounded-full bg-[#555990]/20 p-2 text-slate-300 hover:bg-[#9191E6]/20 hover:text-[#9191E6] transition-all">
+                            <Linkedin size={20} />
+                        </a>
 
-                <button className="text-slate-100 md:hidden" onClick={() => setIsOpen(!isOpen)}>
-                    {isOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+                    </div>
+
+                    <button className="text-slate-100 md:hidden" onClick={() => setIsOpen(!isOpen)}>
+                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
             </div>
 
             {isOpen && (
