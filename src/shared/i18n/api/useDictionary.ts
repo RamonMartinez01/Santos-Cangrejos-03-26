@@ -20,6 +20,13 @@ export interface UIDictionary {
         code: string;
         demo: string;
     };
+    navbar: {
+        home: string;
+        projects: string;
+        contact: string;
+        cvSpanish: string;
+        cvEnglish: string;
+    };
 }
 
 // El backend devuelve un objeto donde cada "section" es una llave
