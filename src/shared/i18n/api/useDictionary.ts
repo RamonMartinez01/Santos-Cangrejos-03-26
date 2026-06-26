@@ -6,6 +6,17 @@ import { useLocaleStore } from '../../useLocaleStore'
 
 // 1. Tipado estricto del Payload que inyectamos en la base de datos
 export interface UIDictionary {
+    hero: {
+        roleBadge: string;
+        titleLine1: string;
+        titleLine2: string;
+        description: string;
+        ctaProjects: string;
+        ctaContact: string;
+        downloadText: string;
+        cvSpanish: string;
+        cvEnglish: string;
+    };
     projectsBoard: {
         title: string;
         highlight: string;
