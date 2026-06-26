@@ -1,7 +1,7 @@
 // src/App.tsx
 import { Navbar } from '././widgets/Navbar';
 import { Hero } from '././widgets/Hero';
-import { Contact } from './sections/Contact';
+import { Contact } from '././widgets/Contact';
 import { ProjectsBoard } from './widgets/ProjectsBoard';
 
 function App() {

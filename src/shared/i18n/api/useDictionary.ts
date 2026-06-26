@@ -38,6 +38,25 @@ export interface UIDictionary {
         cvSpanish: string;
         cvEnglish: string;
     };
+    contact: {
+        titleStart: string;
+        titleHighlight: string;
+        titleEnd: string;
+        description: string;
+        whatsappLabel: string;
+        whatsappText: string;
+        whatsappMessage: string;
+        emailLabel: string;
+        emailCopied: string;
+        emailFeedback: string;
+        formNameLabel: string;
+        formNamePlaceholder: string;
+        formEmailLabel: string;
+        formEmailPlaceholder: string;
+        formMessageLabel: string;
+        formMessagePlaceholder: string;
+        formSubmit: string;
+    };
 }
 
 // El backend devuelve un objeto donde cada "section" es una llave
