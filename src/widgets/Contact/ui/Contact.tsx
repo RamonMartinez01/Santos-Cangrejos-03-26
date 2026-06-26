@@ -1,32 +1,25 @@
-// src/sections/Contact.tsx
+// src/widgets/Contact/ui/Contact.tsx
+
 import { useState } from 'react';
 import { Check, Mail, MessageCircle, Send } from 'lucide-react';
+import { useDictionary } from '../../../shared/i18n/api/useDictionary';
 
 export const Contact = () => {
     const [copied, setCopied] = useState(false);
     const email = "martinezcjr1@gmail.com";
+    const phoneNumber = "526671040980";
 
-    // =============================================================
-    // Configuración botón WhatsApp
-    //==============================================================
-    const phoneNumber = "526671040980"; // Tu número sin símbolos
-    const message = `Hola!
-Vi tu portafolio y me gustaría que tuvieramos una charla.
-¿Estás libre ahora, o agendamos algo?`;
+    const { data: dictionary } = useDictionary();
+    const texts = dictionary?.contact;
 
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    // Codificamos el mensaje dinámico del diccionario
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(texts?.whatsappMessage || '')}`;
 
-    // =============================================================
-    // Función para copiar info del botón de correo
-    //==============================================================
     const copyToClipboard = () => {
         navigator.clipboard.writeText(email);
         setCopied(true);
-
-        // El mensaje desaparece después de 2 segundos
         setTimeout(() => setCopied(false), 2500);
     };
-    // ===============================================================
 
     return (
         <section id="contact" className="py-20">
@@ -35,15 +28,13 @@ Vi tu portafolio y me gustaría que tuvieramos una charla.
                 {/* Columna Izquierda: Info y RRSS */}
                 <div>
                     <h2 className="text-3xl font-bold text-white sm:text-4xl">
-                        ¿Tienes un <span className="text-[#9191E6]">proyecto</span> en mente?
+                        {texts?.titleStart} <span className="text-[#9191E6]">{texts?.titleHighlight}</span> {texts?.titleEnd}
                     </h2>
                     <p className="mt-4 text-slate-400">
-                        Estoy abierto a nuevas oportunidades de colaboración, proyectos freelance
-                        o simplemente para charlar sobre desarrollo web y MLOps.
+                        {texts?.description}
                     </p>
 
                     <div className="mt-8 space-y-4">
-                        {/* WhatsApp Directo */}
                         <a
                             href={whatsappUrl}
                             target="_blank"
@@ -54,76 +45,72 @@ Vi tu portafolio y me gustaría que tuvieramos una charla.
                                 <MessageCircle size={24} />
                             </div>
                             <div>
-                                <p className="text-xs text-slate-500 uppercase font-bold">WhatsApp</p>
-                                <p className="text-sm font-medium text-slate-200 underline">Encuétrame por WhatsApp</p>
+                                <p className="text-xs text-slate-500 uppercase font-bold">{texts?.whatsappLabel}</p>
+                                <p className="text-sm font-medium text-slate-200 underline">{texts?.whatsappText}</p>
                             </div>
                         </a>
 
-                        {/* Botón de Copiar Email */}
                         <button
                             onClick={copyToClipboard}
                             className="relative flex w-full items-center gap-4 rounded-lg border border-[#555990]/20 bg-[#555990]/10 p-4 transition-all hover:border-[#9191E6]/50 hover:bg-[#555990]/20"
                         >
                             <div className="rounded-full bg-[#9191E6]/20 p-2 text-[#9191E6]">
-                                {/* Cambia el icono si ya se copió */}
                                 {copied ? <Check size={24} /> : <Mail size={24} />}
                             </div>
 
                             <div className="text-left">
                                 <p className="text-xs font-bold uppercase text-slate-500">
-                                    {copied ? '¡Listo!' : 'Email'}
+                                    {copied ? texts?.emailCopied : texts?.emailLabel}
                                 </p>
                                 <p className="text-sm font-medium text-slate-200">
-                                    {copied ? 'Correo copiado al portapapeles' : email}
+                                    {copied ? texts?.emailFeedback : email}
                                 </p>
                             </div>
 
-                            {/* Pequeño indicador visual tipo Tooltip (Opcional) */}
                             {copied && (
                                 <span className="absolute -top-2 right-4 rounded bg-[#9191E6] px-2 py-1 text-[10px] font-bold text-white animate-bounce">
-                                    ¡COPIADO!
+                                    {texts?.emailCopied}
                                 </span>
                             )}
                         </button>
                     </div>
                 </div>
 
-                {/* Columna Derecha: Formulario Real */}
+                {/* Columna Derecha: Formulario */}
                 <form
-                    action="https://formspree.io/f/mqeyqojk" // URL dada por Formspree
+                    action="https://formspree.io/f/mqeyqojk"
                     method="POST"
                     className="flex flex-col gap-4 rounded-2xl bg-[#555990]/5 p-6 border border-[#555990]/20"
                 >
                     <div>
-                        <label className="text-xs font-bold uppercase text-slate-500 px-1">Nombre</label>
+                        <label className="text-xs font-bold uppercase text-slate-500 px-1">{texts?.formNameLabel}</label>
                         <input
                             type="text"
-                            name="name" // <--- Importante para Formspree
+                            name="name"
                             required
-                            placeholder="Tu nombre"
+                            placeholder={texts?.formNamePlaceholder}
                             className="mt-1 w-full rounded-lg border border-[#555990]/30 bg-[#0F111A] px-4 py-3 text-sm text-slate-200 outline-none focus:border-[#9191E6] focus:ring-1 focus:ring-[#9191E6]/50"
                         />
                     </div>
 
-                    {/* campo: Email (Indispensable para responder) */}
                     <div>
-                        <label className="text-xs font-bold uppercase text-slate-500 px-1">Tu Correo Electrónico</label>
+                        <label className="text-xs font-bold uppercase text-slate-500 px-1">{texts?.formEmailLabel}</label>
                         <input
                             type="email"
-                            name="email" // <--- Importante para Formspree
+                            name="email"
                             required
-                            placeholder="nombre@ejemplo.com"
+                            placeholder={texts?.formEmailPlaceholder}
                             className="mt-1 w-full rounded-lg border border-[#555990]/30 bg-[#0F111A] px-4 py-3 text-sm text-slate-200 outline-none focus:border-[#9191E6] focus:ring-1 focus:ring-[#9191E6]/50"
                         />
                     </div>
 
                     <div>
-                        <label className="text-xs font-bold uppercase text-slate-500 px-1">Mensaje</label>
+                        <label className="text-xs font-bold uppercase text-slate-500 px-1">{texts?.formMessageLabel}</label>
                         <textarea
-                            name="message" // <--- Importante para Formspree
+                            name="message"
                             required
                             rows={4}
-                            placeholder="¿En qué puedo ayudarte?"
+                            placeholder={texts?.formMessagePlaceholder}
                             className="mt-1 w-full rounded-lg border border-[#555990]/30 bg-[#0F111A] px-4 py-3 text-sm text-slate-200 outline-none focus:border-[#9191E6] focus:ring-1 focus:ring-[#9191E6]/50"
                         />
                     </div>
@@ -132,7 +119,7 @@ Vi tu portafolio y me gustaría que tuvieramos una charla.
                         type="submit"
                         className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-[#9191E6] py-3 font-bold text-white transition-all hover:brightness-110 active:scale-95"
                     >
-                        Enviar Mensaje
+                        {texts?.formSubmit}
                         <Send size={18} />
                     </button>
                 </form>
