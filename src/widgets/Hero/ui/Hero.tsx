@@ -1,11 +1,20 @@
 // src/widgets/Hero/ui/Hero.tsx
 
-import { ArrowRight, Download, FileText, Terminal } from 'lucide-react';
+import { ArrowRight, FileText, Terminal } from 'lucide-react';
 import { useDictionary } from '../../../shared/i18n/api/useDictionary';
+import { useLocaleStore } from '../../../shared/useLocaleStore';
 
 export const Hero = () => {
     const { data: dictionary } = useDictionary();
     const texts = dictionary?.hero;
+
+    // Extrae el idioma activo
+    const locale = useLocaleStore((state) => state.locale);
+    
+    // 3. Determina la ruta del PDF dinámicamente
+    const cvPath = locale === 'es' 
+        ? '/Ramon-Martinez-CV26Esp.pdf' 
+        : '/Ramon-Martinez-CV26Eng.pdf';
 
     return (
         <section id="home" className="relative flex min-h-screen flex-col justify-center px-6 pt-20">
@@ -59,23 +68,13 @@ export const Hero = () => {
 
                     <div className="flex flex-wrap gap-3">
                         <a
-                            href="/Ramon-Martinez-CV26Esp.pdf"
-                            download="CV_Ramon_Martinez_ES.pdf"
-                            className="flex items-center gap-2 rounded-lg border border-[#555990]/40 bg-[#555990]/10 px-4 py-2 text-sm font-medium text-slate-200 transition-all hover:border-[#9191E6] hover:text-[#9191E6]"
+                            href={cvPath}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 rounded-lg border border-[#555990]/40 bg-[#555990]/10 px-6 py-2.5 text-sm font-medium text-slate-200 transition-all hover:border-[#9191E6] hover:text-[#9191E6]"
                         >
                             <FileText size={18} />
-                            {texts?.cvSpanish}
-                            <Download size={14} className="opacity-50" />
-                        </a>
-
-                        <a
-                            href="/Ramon-Martinez-CV26Eng.pdf"
-                            download="CV_Ramon_Martinez_EN.pdf"
-                            className="flex items-center gap-2 rounded-lg border border-[#555990]/40 bg-[#555990]/10 px-4 py-2 text-sm font-medium text-slate-200 transition-all hover:border-[#9191E6] hover:text-[#9191E6]"
-                        >
-                            <FileText size={18} />
-                            {texts?.cvEnglish}
-                            <Download size={14} className="opacity-50" />
+                            {texts?.viewCv}
                         </a>
                     </div>
                 </div>
