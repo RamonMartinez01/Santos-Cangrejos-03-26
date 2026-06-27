@@ -16,6 +16,7 @@ export interface UIDictionary {
         downloadText: string;
         cvSpanish: string;
         cvEnglish: string;
+        viewCv: string;
     };
     projectsBoard: {
         title: string;
