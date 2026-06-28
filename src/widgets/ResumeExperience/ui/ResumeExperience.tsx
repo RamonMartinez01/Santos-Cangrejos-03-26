@@ -1,5 +1,5 @@
 // src/widgets/ResumeExperience/ui/ResumeExperience.tsx
-import { Briefcase, Code2, Globe, Microscope } from 'lucide-react';
+import { BookOpen, Briefcase, Code2, Globe, Microscope } from 'lucide-react';
 import { useDictionary } from '../../../shared/i18n/api/useDictionary';
 
 export const ResumeExperience = () => {
@@ -22,10 +22,17 @@ export const ResumeExperience = () => {
             icon: <Globe size={16} className="text-[#9191E6]" />
         },
         {
-            id: 'biology',
+            id: 'stem',
             title: texts?.job3Title,
             date: texts?.job3Date,
             description: texts?.job3Desc,
+            icon: <BookOpen size={16} className="text-[#9191E6]" />
+        },
+        {
+            id: 'biology',
+            title: texts?.job4Title,
+            date: texts?.job4Date,
+            description: texts?.job4Desc,
             icon: <Microscope size={16} className="text-[#9191E6]" />
         }
     ];

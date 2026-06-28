@@ -81,6 +81,9 @@ export interface UIDictionary {
         job3Title: string;
         job3Date: string;
         job3Desc: string;
+        job4Title: string;
+        job4Date: string;
+        job4Desc: string;
     };
 }
 
