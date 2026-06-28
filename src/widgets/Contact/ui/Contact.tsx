@@ -22,7 +22,7 @@ export const Contact = () => {
     };
 
     return (
-        <section id="contact" className="py-20">
+        <section id="contact" className="relative flex min-h-screen flex-col justify-center px-6 pt-20">
             <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
 
                 {/* Columna Izquierda: Info y RRSS */}
