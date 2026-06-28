@@ -1,7 +1,7 @@
 // src/widgets/Navbar/ui/Navbar.tsx
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { Menu, X, Github, Linkedin, FileText, Download } from 'lucide-react';
+import { Menu, X, Github, Linkedin } from 'lucide-react';
 // Ajusta la ruta de importación de tu feature y diccionario según la nueva ubicación
 import { LocaleSwitcher } from '../../../features/LocalSwitcher';
 import { useDictionary } from '../../../shared/i18n/api/useDictionary';
