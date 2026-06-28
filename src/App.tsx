@@ -2,6 +2,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Navbar } from '././widgets/Navbar';
 import { Home } from './pages/Home';
+import { Curriculum } from './pages/Curriculum';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* en el futuro <Route path="/curriculum" element={<CurriculumPage />} /> */}
+          <Route path="/curriculum" element={<Curriculum />} />
          </Routes>
 
         <footer className="py-10 text-center text-sm text-slate-500 border-t border-[#555990]/10">
