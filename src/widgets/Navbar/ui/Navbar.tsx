@@ -1,5 +1,5 @@
 // src/widgets/Navbar/ui/Navbar.tsx
-
+import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { Menu, X, Github, Linkedin, FileText, Download } from 'lucide-react';
 // Ajusta la ruta de importación de tu feature y diccionario según la nueva ubicación
@@ -14,12 +14,12 @@ export const Navbar = () => {
     const { data: dictionary } = useDictionary();
     const texts = dictionary?.navbar;
 
-    // Los links ahora son dinámicos. Usamos un fallback a cadena vacía 
-    // mientras la red carga el diccionario para evitar parpadeos extraños.
+    //  las rutas son absolutas desde la raíz
     const navLinks = [
-        { name: texts?.home || '', href: '#home' },
-        { name: texts?.projects || '', href: '#projects' },
-        { name: texts?.contact || '', href: '#contact' },
+        { name: texts?.home || '', path: '/#home' },
+        { name: texts?.projects || '', path: '/#projects' },
+        { name: texts?.contact || '', path: '/#contact' },
+        { name: 'CV', path: '/curriculum' } 
     ];
 
     useEffect(() => {
@@ -47,9 +47,9 @@ export const Navbar = () => {
     return (
         <nav ref={navRef} className="fixed top-0 z-50 w-full border-b border-[#555990]/20 bg-[#0F111A]/80 backdrop-blur-md">
             <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-                <a href="#home" className="text-xl font-bold tracking-tighter text-[#9191E6] hover:brightness-110">
+                <Link to="#home" className="text-xl font-bold tracking-tighter text-[#9191E6] hover:brightness-110">
                     Ramón<span className="text-slate-100">.</span>Martínez
-                </a>
+                </Link>
                 <div className='items-center gap-3 flex flex-row'>
                     <div>
                         <LocaleSwitcher />
@@ -74,24 +74,18 @@ export const Navbar = () => {
                 <div className="absolute w-full border-b border-[#555990]/20 bg-[#0F111A] px-6 py-6 md:hidden">
                     <div className="flex flex-col gap-6">
                         {navLinks.map((link) => (
-                            <a key={link.href} href={link.href} onClick={() => setIsOpen(false)} className="text-lg font-medium text-slate-300">
+                            // 4. Los enlaces del menú ahora son <Link>
+                            <Link
+                                key={link.path}
+                                to={link.path}
+                                onClick={() => setIsOpen(false)}
+                                className="text-lg font-medium text-slate-300 hover:text-[#9191E6] transition-colors"
+                            >
                                 {link.name}
-                            </a>
+                            </Link>
                         ))}
                     </div>
 
-                    <div className="flex flex-col flex-wrap gap-3 mt-3">
-                        <a href="/Ramon-Martinez-CV26Esp.pdf" download="CV_Ramon_Martinez_ES.pdf" className="flex items-center gap-2 rounded-lg border border-[#555990]/40 bg-[#555990]/10 px-4 py-2 text-sm font-medium text-slate-200 transition-all hover:border-[#9191E6] hover:text-[#9191E6]">
-                            <FileText size={18} />
-                            {texts?.cvSpanish}
-                            <Download size={14} className="opacity-50" />
-                        </a>
-                        <a href="/Ramon-Martinez-CV26Eng.pdf" download="CV_Ramon_Martinez_EN.pdf" className="flex items-center gap-2 rounded-lg border border-[#555990]/40 bg-[#555990]/10 px-4 py-2 text-sm font-medium text-slate-200 transition-all hover:border-[#9191E6] hover:text-[#9191E6]">
-                            <FileText size={18} />
-                            {texts?.cvEnglish}
-                            <Download size={14} className="opacity-50" />
-                        </a>
-                    </div>
                 </div>
             )}
         </nav>

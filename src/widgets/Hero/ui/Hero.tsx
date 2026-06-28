@@ -2,19 +2,12 @@
 
 import { ArrowRight, FileText, Terminal } from 'lucide-react';
 import { useDictionary } from '../../../shared/i18n/api/useDictionary';
-import { useLocaleStore } from '../../../shared/store/useLocaleStore';
+import { Link } from 'react-router-dom';
 
 export const Hero = () => {
     const { data: dictionary } = useDictionary();
     const texts = dictionary?.hero;
 
-    // Extrae el idioma activo
-    const locale = useLocaleStore((state) => state.locale);
-    
-    // 3. Determina la ruta del PDF dinámicamente
-    const cvPath = locale === 'es' 
-        ? '/Ramon-Martinez-CV26Esp.pdf' 
-        : '/Ramon-Martinez-CV26Eng.pdf';
 
     return (
         <section id="home" className="relative flex min-h-screen flex-col justify-center px-6 pt-20">
@@ -60,22 +53,20 @@ export const Hero = () => {
                     </a>
                 </div>
 
-                {/* Descarga de CV */}
+                {/* Sección CV */}
                 <div className="mt-8 flex flex-col gap-4">
                     <p className="text-sm font-semibold uppercase tracking-wider text-slate-500">
                         {texts?.downloadText}
                     </p>
 
                     <div className="flex flex-wrap gap-3">
-                        <a
-                            href={cvPath}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <Link
+                            to="/curriculum"
                             className="flex items-center gap-2 rounded-lg border border-[#555990]/40 bg-[#555990]/10 px-6 py-2.5 text-sm font-medium text-slate-200 transition-all hover:border-[#9191E6] hover:text-[#9191E6]"
                         >
                             <FileText size={18} />
                             {texts?.viewCv}
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
