@@ -2,7 +2,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { Menu, X, Github, Linkedin } from 'lucide-react';
-// Ajusta la ruta de importación de tu feature y diccionario según la nueva ubicación
 import { LocaleSwitcher } from '../../../features/LocalSwitcher';
 import { useDictionary } from '../../../shared/i18n/api/useDictionary';
 
@@ -47,7 +46,7 @@ export const Navbar = () => {
     return (
         <nav ref={navRef} className="fixed top-0 z-50 w-full border-b border-[#555990]/20 bg-[#0F111A]/80 backdrop-blur-md">
             <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-                <Link to="#home" className="text-xl font-bold tracking-tighter text-[#9191E6] hover:brightness-110">
+                <Link to="/#home" className="text-xl font-bold tracking-tighter text-[#9191E6] hover:brightness-110">
                     Ramón<span className="text-slate-100">.</span>Martínez
                 </Link>
                 <div className='items-center gap-3 flex flex-row'>
