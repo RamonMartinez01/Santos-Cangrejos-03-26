@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '../../api/apiClient';
-import { useLocaleStore } from '../../useLocaleStore'
+import { useLocaleStore } from '../../store/useLocaleStore'
 
 // 1. Tipado estricto del Payload que inyectamos en la base de datos
 export interface UIDictionary {
@@ -57,6 +57,33 @@ export interface UIDictionary {
         formMessageLabel: string;
         formMessagePlaceholder: string;
         formSubmit: string;
+    };
+    resumeHeader: {
+        title: string;
+        role: string;
+        downloadPdf: string;
+    };
+    resumeStack: {
+        title: string;
+        frontend: string;
+        backend: string;
+        database: string;
+        tools: string;
+    };
+    resumeExperience: {
+        title: string;
+        job1Title: string;
+        job1Date: string;
+        job1Desc: string;
+        job2Title: string;
+        job2Date: string;
+        job2Desc: string;
+        job3Title: string;
+        job3Date: string;
+        job3Desc: string;
+        job4Title: string;
+        job4Date: string;
+        job4Desc: string;
     };
 }
 

@@ -15,7 +15,7 @@ export const ProjectsBoard = () => {
     const errorMessage = error instanceof Error ? error.message : null;
 
     return (
-        <section id="projects" className="py-20">
+        <section id="projects" className="relative flex min-h-screen flex-col justify-center px-6 pt-20">
             {/* Encabezado del Widget */}
             <div className="mb-12">
                 <h2 className="text-3xl font-bold text-slate-100 sm:text-4xl">

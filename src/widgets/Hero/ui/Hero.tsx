@@ -2,7 +2,7 @@
 
 import { ArrowRight, FileText, Terminal } from 'lucide-react';
 import { useDictionary } from '../../../shared/i18n/api/useDictionary';
-import { useLocaleStore } from '../../../shared/useLocaleStore';
+import { useLocaleStore } from '../../../shared/store/useLocaleStore';
 
 export const Hero = () => {
     const { data: dictionary } = useDictionary();

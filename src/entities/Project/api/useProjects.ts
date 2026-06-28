@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '../../../shared/api/apiClient';
 import type { Project } from '../model/types';
-import { useLocaleStore } from '../../../shared/useLocaleStore';
+import { useLocaleStore } from '../../../shared/store/useLocaleStore';
 
 /**
  * Interfaz que refleja exactamente el envoltorio que nuestro 
