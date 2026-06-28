@@ -70,6 +70,18 @@ export interface UIDictionary {
         database: string;
         tools: string;
     };
+    resumeExperience: {
+        title: string;
+        job1Title: string;
+        job1Date: string;
+        job1Desc: string;
+        job2Title: string;
+        job2Date: string;
+        job2Desc: string;
+        job3Title: string;
+        job3Date: string;
+        job3Desc: string;
+    };
 }
 
 // El backend devuelve un objeto donde cada "section" es una llave

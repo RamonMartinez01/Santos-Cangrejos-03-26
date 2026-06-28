@@ -1,4 +1,5 @@
 // src/pages/Curriculum/ui/Curriculum.tsx
+import { ResumeExperience } from "../../../widgets/ResumeExperience";
 import { ResumeHeader } from "../../../widgets/ResumeHeader";
 import { ResumeStack } from "../../../widgets/ResumeStack";
 
@@ -9,7 +10,7 @@ export const Curriculum = () => {
             {/* COmponentes Widgets */}
             <ResumeHeader />
             <ResumeStack />
-           
+            <ResumeExperience />
         </main>
     );
 };
