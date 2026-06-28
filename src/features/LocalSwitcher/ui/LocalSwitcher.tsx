@@ -1,5 +1,5 @@
 // src/features/LocaleSwitcher/ui/LocaleSwitcher.tsx
-import { useLocaleStore } from '../../../shared/useLocaleStore'
+import { useLocaleStore } from '../../../shared/store/useLocaleStore'
 
 export const LocaleSwitcher = () => {
     // Solo extraemos lo que necesitamos del store para evitar re-renders innecesarios
