@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '../../api/apiClient';
-import { useLocaleStore } from '../../useLocaleStore'
+import { useLocaleStore } from '../../store/useLocaleStore'
 
 // 1. Tipado estricto del Payload que inyectamos en la base de datos
 export interface UIDictionary {
@@ -57,6 +57,11 @@ export interface UIDictionary {
         formMessageLabel: string;
         formMessagePlaceholder: string;
         formSubmit: string;
+    };
+    resumeHeader: {
+        title: string;
+        role: string;
+        downloadPdf: string;
     };
 }
 
