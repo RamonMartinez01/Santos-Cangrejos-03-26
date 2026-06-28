@@ -63,6 +63,13 @@ export interface UIDictionary {
         role: string;
         downloadPdf: string;
     };
+    resumeStack: {
+        title: string;
+        frontend: string;
+        backend: string;
+        database: string;
+        tools: string;
+    };
 }
 
 // El backend devuelve un objeto donde cada "section" es una llave
