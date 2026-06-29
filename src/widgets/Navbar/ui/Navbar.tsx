@@ -70,7 +70,7 @@ export const Navbar = () => {
             </div>
 
             {isOpen && (
-                <div className="absolute w-full border-b border-[#555990]/20 bg-[#0F111A] px-6 py-6 md:hidden">
+                <div className="absolute w-full border-b border-[#555990]/20 bg-[#161a36] shadow-2xl shadow-black/60 px-6 py-6 md:hidden animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="flex flex-col gap-6">
                         {navLinks.map((link) => (
                             // 4. Los enlaces del menú ahora son <Link>
