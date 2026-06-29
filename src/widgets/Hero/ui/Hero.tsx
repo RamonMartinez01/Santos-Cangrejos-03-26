@@ -23,7 +23,7 @@ export const Hero = () => {
                 </div>
 
                 {/* Título Principal */}
-                <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-7xl">
+                <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-7xl">
                     {texts?.titleLine1} <br />
                     <span className="bg-gradient-to-r from-[#9191E6] via-[#555990] to-[#603C75] bg-clip-text text-transparent">
                         {texts?.titleLine2}
