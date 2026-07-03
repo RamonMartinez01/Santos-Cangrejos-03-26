@@ -7,7 +7,10 @@ export interface Project {
     description: string;
     tags: string[];
     imageUrl: string | null;
-    githubUrl: string | null;
+    repositories?: {
+        label: string;
+        url: string;
+    }[];
     liveDemoUrl: string | null;
     isFeatured: boolean;
 }
