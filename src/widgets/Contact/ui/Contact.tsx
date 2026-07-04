@@ -23,10 +23,10 @@ export const Contact = () => {
 
     return (
         <section id="contact" className="relative flex min-h-screen flex-col justify-center px-6 pt-20">
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+            <div className="mx-auto flex w-full max-w-5xl flex-wrap justify-center gap-10 lg:gap-12">
 
                 {/* Columna Izquierda: Info y RRSS */}
-                <div>
+                <div className="w-full max-w-[440px]">
                     <h2 className="text-3xl font-bold text-white sm:text-4xl">
                         {texts?.titleStart} <span className="text-[#9191E6]">{texts?.titleHighlight}</span> {texts?.titleEnd}
                     </h2>
@@ -80,7 +80,7 @@ export const Contact = () => {
                 <form
                     action="https://formspree.io/f/mqeyqojk"
                     method="POST"
-                    className="flex flex-col gap-4 rounded-2xl bg-[#555990]/5 p-6 border border-[#555990]/20"
+                    className="flex w-full max-w-[440px] flex-col gap-4 rounded-2xl bg-[#555990]/5 p-6 border border-[#555990]/20"
                 >
                     <div>
                         <label className="text-xs font-bold uppercase text-slate-500 px-1">{texts?.formNameLabel}</label>
