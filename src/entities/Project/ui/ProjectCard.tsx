@@ -8,14 +8,14 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
-    const { 
-        title, 
-        description, 
-        tags, 
-        imageUrl, 
-        repositories, 
-        liveDemoUrl, 
-        isFeatured 
+    const {
+        title,
+        description,
+        tags,
+        imageUrl,
+        repositories,
+        liveDemoUrl,
+        isFeatured
     } = project;
 
     // Consumimos el diccionario. 
@@ -25,17 +25,34 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
     const texts = dictionary?.projectCard;
 
     return (
-     <article className="w-full max-w-[440px] flex flex-col rounded-xl border border-slate-700/50 bg-slate-800/20 overflow-hidden transition-all duration-300 hover:border-slate-500/50 hover:bg-slate-800/40">
+        <article className="w-full max-w-[440px] flex flex-col rounded-xl border border-slate-700/50 bg-slate-800/20 overflow-hidden transition-all duration-300 hover:border-slate-500/50 hover:bg-slate-800/40">
             {/* Cabecera visual (Opcional: solo si hay imagen) */}
             {imageUrl && (
-                <div className="w-full h-48 overflow-hidden bg-slate-900/50">
-                    <img 
-                        src={imageUrl} 
-                        alt={`Captura de pantalla del proyecto ${title}`} 
-                        className="w-full h-full object-cover opacity-90 transition-opacity hover:opacity-100"
-                        loading="lazy"
-                    />
-                </div>
+                liveDemoUrl ? (
+                    <a
+                        href={liveDemoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full h-48 overflow-hidden bg-slate-900/50 group/image"
+                        aria-label={`Visitar demo de ${title}`}
+                    >
+                        <img
+                            src={imageUrl}
+                            alt={`Captura de pantalla del proyecto ${title}`}
+                            className="w-full h-full object-cover opacity-90 transition-all duration-500 group-hover/image:scale-105 group-hover/image:opacity-100"
+                            loading="lazy"
+                        />
+                    </a>
+                ) : (
+                    <div className="w-full h-48 overflow-hidden bg-slate-900/50">
+                        <img
+                            src={imageUrl}
+                            alt={`Captura de pantalla del proyecto ${title}`}
+                            className="w-full h-full object-cover opacity-90 transition-opacity hover:opacity-100"
+                            loading="lazy"
+                        />
+                    </div>
+                )
             )}
 
             {/* Cuerpo del contenido */}
@@ -62,8 +79,8 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                 {tags && tags.length > 0 && (
                     <ul className="flex flex-wrap gap-2 mb-6" aria-label="Tecnologías utilizadas">
                         {tags.map((tag) => (
-                            <li 
-                                key={tag} 
+                            <li
+                                key={tag}
                                 className="px-2.5 py-1 text-xs font-medium text-slate-300 bg-slate-700/50 rounded-md"
                             >
                                 {tag}
@@ -74,8 +91,8 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
 
                 {/* Pie del componente: Enlaces */}
                 <footer className="flex flex-wrap items-center gap-4 mt-auto pt-4 border-t border-slate-700/50">
-                    {repositories && repositories.length > 0 && repositories.map((repo, index) => ( 
-                        <a 
+                    {repositories && repositories.length > 0 && repositories.map((repo, index) => (
+                        <a
                             key={index}
                             href={repo.url}
                             target="_blank"
@@ -89,7 +106,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                     ))}
                     {/* El Live Demo se empuja a la derecha gracias a ml-auto */}
                     {liveDemoUrl && texts && (
-                        <a 
+                        <a
                             href={liveDemoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
