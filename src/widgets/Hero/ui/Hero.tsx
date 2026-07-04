@@ -11,10 +11,10 @@ export const Hero = () => {
 
     return (
         <section id="home" className="relative flex min-h-screen flex-col justify-center px-6 pt-20">
-            {/* Decoración de fondo */}
+            {/* Decoración de fondo 
             <div className="absolute top-1/4 left-1/4 -z-10 h-64 w-64 rounded-full bg-[#603C75]/20 blur-[100px]" />
             <div className="absolute bottom-1/4 right-1/4 -z-10 h-64 w-64 rounded-full bg-[#9191E6]/10 blur-[100px]" />
-
+*/}
             <div className="mx-auto max-w-5xl">
                 {/* Badge */}
                 <div className="mb-6 flex items-center gap-2 w-fit rounded-full border border-[#555990]/30 bg-[#555990]/10 px-4 py-1.5 text-xs font-medium text-[#9191E6]">
