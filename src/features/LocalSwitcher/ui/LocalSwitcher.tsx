@@ -10,17 +10,17 @@ export const LocaleSwitcher = () => {
         <button
             onClick={toggleLocale}
             aria-label="Cambiar idioma / Change language"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-700/50 bg-slate-800/30 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700/50 hover:border-slate-600/50 transition-all duration-200"
+            className="group flex items-center gap-1.5 px-2 py-1 font-sans text-xs font-semibold uppercase tracking-widest text-[#5A5855] transition-colors hover:text-[#111111]"
         >
             <svg 
-                className="w-4 h-4 text-[#9191E6]" 
+                className="w-4 h-4 transition-transform group-hover:scale-110" 
                 fill="none" 
                 viewBox="0 0 24 24" 
                 stroke="currentColor"
             >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
             </svg>
-            <span className="uppercase tracking-wider">
+            <span className="mt-[1px]">
                 {locale === 'es' ? 'ES' : 'EN'}
             </span>
         </button>
