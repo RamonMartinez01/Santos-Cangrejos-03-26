@@ -44,33 +44,46 @@ export const Navbar = () => {
     }, [isOpen]);
 
     return (
-        <nav ref={navRef} className="fixed top-0 z-50 w-full border-b border-[#555990]/20 bg-[#0F111A]/80 backdrop-blur-md">
-            <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-                <Link to="/#home" className="text-xl font-bold tracking-tighter text-[#9191E6] hover:brightness-110">
+        <nav ref={navRef} className="fixed top-0 z-50 w-full border-b border-[#EAEAE7] bg-[#F7F7F5]/95 backdrop-blur-sm transition-all">
+
+            <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-2.7 md:px-6 md:py-4">
+                <Link to="/#home" className="text-lg md:text-xl font-serif font-bold tracking-tight text-[#111111] transition-opacity hover:opacity-70">
                     Ramón<span className="text-slate-100">.</span>Martínez
                 </Link>
-                <div className='items-center gap-3 flex flex-row'>
+                <div className='flex flex-row items-center gap-4'>
                     <div>
                         <LocaleSwitcher />
                     </div>
-                    <div className="hidden items-center gap-3 md:flex">
-                        <a href="https://github.com/RamonMartinez01" target="_blank" rel="noopener noreferrer" className="rounded-full bg-[#555990]/20 p-2 text-slate-300 hover:bg-[#9191E6]/20 hover:text-[#9191E6] transition-all">
+                    <div className="hidden items-center gap-2 md:flex">
+                        <a 
+                            href="https://github.com/RamonMartinez01" 
+                            target="_blank" rel="noopener noreferrer" 
+                            className="p-2 text-[#5A5855] transition-colors hover:text-[#111111]"
+                            aria-label="GitHub"
+                        >
                             <Github size={20} />
                         </a>
-                        <a href="https://www.linkedin.com/in/ramon-martinez-full-stack-developer/" target="_blank" rel="noopener noreferrer" className="rounded-full bg-[#555990]/20 p-2 text-slate-300 hover:bg-[#9191E6]/20 hover:text-[#9191E6] transition-all">
+                        <a 
+                            href="https://www.linkedin.com/in/ramon-martinez-full-stack-developer/" 
+                            target="_blank" rel="noopener noreferrer" 
+                            className="p-2 text-[#5A5855] transition-colors hover:text-[#111111]"
+                            aria-label="LinkedIn"
+                        >
                             <Linkedin size={20} />
                         </a>
 
                     </div>
 
-                    <button className="text-slate-100 md:hidden" onClick={() => setIsOpen(!isOpen)}>
-                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                    {/* Botón menú móvil */}
+                    <button className="p-1 text-[#111111] md:hidden" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+                        {isOpen ? <X size={24} /> : <Menu size={24} strokeWidth={1.5} />}
                     </button>
                 </div>
             </div>
 
+            {/* Menú Desplegable Móvil */}
             {isOpen && (
-                <div className="absolute w-full border-b border-[#555990]/20 bg-[#161a36] shadow-2xl shadow-black/60 px-6 py-6 md:hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="absolute w-full border-b border-[#EAEAE7] bg-[#F7F7F5] px-6 py-6 shadow-xl shadow-black/5 md:hidden animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="flex flex-col gap-6">
                         {navLinks.map((link) => (
                             // 4. Los enlaces del menú ahora son <Link>
@@ -78,7 +91,7 @@ export const Navbar = () => {
                                 key={link.path}
                                 to={link.path}
                                 onClick={() => setIsOpen(false)}
-                                className="text-lg font-medium text-slate-300 hover:text-[#9191E6] transition-colors"
+                                className="text-sm font-sans font-semibold uppercase tracking-widest text-[#5A5855] transition-colors hover:text-[#111111]"
                             >
                                 {link.name}
                             </Link>
