@@ -15,11 +15,10 @@ export const ProjectsBoard = () => {
     const errorMessage = error instanceof Error ? error.message : null;
 
     return (
-        <section id="projects" className=" relative flex min-h-screen flex-col justify-center px-6 pt-20">
-            <div className={`mx-auto w-full ${projects.length === 1
-                    ? 'md:max-w-2xl md:mx-auto' // Si hay 1 proyecto: lo limita a un ancho elegante y lo centra
-                    : 'md:grid-cols-2'          // Si hay 2+ proyectos: usa las dos columnas normales
-                }`}>
+        <section id="projects" className="relative flex min-h-screen flex-col justify-center px-6 pt-20">
+            
+            <div className="mx-auto w-full max-w-5xl">
+            
                 {/* Encabezado del Widget */}
                 <div className="mb-12 min-[800px]:ml-[15%]">
                     <h2 className="text-3xl font-bold text-slate-100 sm:text-4xl">
@@ -49,14 +48,13 @@ export const ProjectsBoard = () => {
                 }
 
                 {/* Grid Responsivo (Ensamblaje de Entidades) */}
-                <div className={`grid grid-cols-1 gap-6 lg:gap-8 auto-rows-fr ${projects.length === 1
-                    ? 'md:max-w-2xl md:mx-auto' // Si hay 1 proyecto: lo limita a un ancho elegante y lo centra
-                    : 'md:grid-cols-2'          // Si hay 2+ proyectos: usa las dos columnas normales
-                    }`}>
-                    {projects.map((project) => (
-                        <ProjectCard key={project.id} project={project} />
-                    ))}
-                </div>
+                {!isLoading && !error && projects.length > 0 && (
+                    <div className="flex flex-wrap justify-center items-stretch gap-8 lg:gap-10">
+                        {projects.map((project) => (
+                            <ProjectCard key={project.id} project={project} />
+                        ))}
+                    </div>
+                )}
 
                 {/* grid responsivo */}
                 {
