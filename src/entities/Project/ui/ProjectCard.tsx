@@ -25,7 +25,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
     const texts = dictionary?.projectCard;
 
     return (
-        <article className="flex flex-col h-full rounded-xl border border-slate-700/50 bg-slate-800/20 overflow-hidden transition-all duration-300 hover:border-slate-500/50 hover:bg-slate-800/40">
+     <article className="w-full max-w-[440px] flex flex-col rounded-xl border border-slate-700/50 bg-slate-800/20 overflow-hidden transition-all duration-300 hover:border-slate-500/50 hover:bg-slate-800/40">
             {/* Cabecera visual (Opcional: solo si hay imagen) */}
             {imageUrl && (
                 <div className="w-full h-48 overflow-hidden bg-slate-900/50">
