@@ -1,26 +1,10 @@
 @import "tailwindcss";
 
-:root {
-  color-scheme: dark;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #0F111A;
-  color: #E2E8F0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* Scrollbar estándar que no da warnings */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #0F111A; }
-::-webkit-scrollbar-thumb { 
-  background: #555990; 
-  border-radius: 10px; 
+@layer base {
+  /* Aplicamos el fondo mate y la tinta principal a todo el documento */
+  body {
+    /* Mantenemos el suavizado de fuentes para que la tipografía luzca nítida */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
