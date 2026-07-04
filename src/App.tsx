@@ -10,8 +10,14 @@ function App() {
     <BrowserRouter>
 
       <ScrollManager />
-      
-      <div className="min-h-screen bg-[#0F111A] font-sans selection:bg-[#9191E6]/30 selection:text-white text-slate-200">
+
+       {/* 
+        El Lienzo Maestro:
+        bg-[#F7F7F5]: Papel mate
+        text-[#1C1A1A]: Tinta base
+        selection:*: Contraste invertido elegante al seleccionar texto
+      */}
+      <div className="min-h-screen bg-[#F7F7F5] text-[#1C1A1A] font-sans selection:bg-[#111111] selection:text-[#F7F7F5]">
         <Navbar />
 
         <Routes>
@@ -19,7 +25,12 @@ function App() {
           <Route path="/curriculum" element={<Curriculum />} />
         </Routes>
 
-        <footer className="py-10 text-center text-sm text-slate-500 border-t border-[#555990]/10">
+        {/* 
+          Footer:
+          text-[#5A5855]: Tinta atenuada (Meta)
+          border-[#EAEAE7]: Borde sutil color 'surface'
+        */}
+        <footer className="py-10 text-center text-sm text-[#5A5855] border-t border-[#EAEAE7]">
           © {new Date().getFullYear()} — Built with React & Vite
         </footer>
       </div>

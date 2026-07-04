@@ -6,65 +6,67 @@ export const ResumeExperience = () => {
     const { data: dictionary } = useDictionary();
     const texts = dictionary?.resumeExperience;
 
+    // Quitamos los colores hardcodeados de los íconos; el contenedor padre los teñirá.
     const experiences = [
         {
             id: 'freelance',
             title: texts?.job1Title,
             date: texts?.job1Date,
             description: texts?.job1Desc,
-            icon: <Code2 size={16} className="text-[#9191E6]" />
+            icon: <Code2 size={16} strokeWidth={1.5} />
         },
         {
             id: 'tepozixtli',
             title: texts?.job2Title,
             date: texts?.job2Date,
             description: texts?.job2Desc,
-            icon: <Globe size={16} className="text-[#9191E6]" />
+            icon: <Globe size={16} strokeWidth={1.5} />
         },
         {
             id: 'stem',
             title: texts?.job3Title,
             date: texts?.job3Date,
             description: texts?.job3Desc,
-            icon: <BookOpen size={16} className="text-[#9191E6]" />
+            icon: <BookOpen size={16} strokeWidth={1.5} />
         },
         {
             id: 'biology',
             title: texts?.job4Title,
             date: texts?.job4Date,
             description: texts?.job4Desc,
-            icon: <Microscope size={16} className="text-[#9191E6]" />
+            icon: <Microscope size={16} strokeWidth={1.5} />
         }
     ];
 
     return (
         <section className="mb-16">
-            <h2 className="mb-8 text-2xl font-bold text-white flex items-center gap-2">
-                <Briefcase className="text-[#9191E6]" size={24} />
+            <h2 className="mb-10 flex items-center gap-3 text-2xl md:text-3xl font-serif font-bold text-[#111111]">
+                <Briefcase className="text-[#111111]" size={24} strokeWidth={1.5} />
                 {texts?.title}
             </h2>
 
-            {/* Contenedor de la línea de tiempo */}
-            <div className="relative border-l-2 border-[#555990]/30 ml-3 pl-8 space-y-12">
+            {/* Contenedor de la línea de tiempo: Línea fina y definida */}
+            <div className="relative border-l border-[#111111]/20 ml-3 pl-8 space-y-12 md:space-y-16">
                 
                 {experiences.map((exp) => (
-                    <div key={exp.id} className="relative">
-                        {/* Nodo de la línea de tiempo */}
-                        <div className="absolute -left-[41px] flex h-8 w-8 items-center justify-center rounded-full border-4 border-[#0F111A] bg-[#555990]/20">
+                    <div key={exp.id} className="relative group">
+                        {/* Nodo de la línea de tiempo - Efecto de inversión de tinta al hacer hover */}
+                        <div className="absolute -left-[48.5px] flex h-8 w-8 items-center justify-center rounded-full border border-[#111111] bg-[#F7F7F5] text-[#111111] transition-colors duration-300 group-hover:bg-[#111111] group-hover:text-[#F7F7F5]">
                             {exp.icon}
                         </div>
 
                         {/* Contenido */}
-                        <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                            <h3 className="text-xl font-bold text-slate-100">
+                        <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+                            <h3 className="text-xl md:text-2xl font-serif font-bold text-[#111111] leading-tight">
                                 {exp.title}
                             </h3>
-                            <span className="w-fit rounded-full bg-[#555990]/20 px-3 py-1 text-xs font-semibold text-[#9191E6]">
+                            {/* Fecha estilo metadato tipográfico, sin fondos de colores */}
+                            <span className="w-fit border-b border-[#111111] pb-0.5 text-[10px] md:text-xs font-sans font-bold uppercase tracking-widest text-[#5A5855]">
                                 {exp.date}
                             </span>
                         </div>
                         
-                        <p className="mt-4 text-base leading-relaxed text-slate-400">
+                        <p className="text-sm md:text-base font-serif leading-relaxed text-[#3A3835]">
                             {exp.description}
                         </p>
                     </div>
