@@ -25,12 +25,12 @@ export const Contact = () => {
             <div className="mx-auto flex w-full max-w-5xl flex-wrap justify-center gap-10 lg:gap-12">
 
                 {/* Columna Izquierda: Info y RRSS */}
-                <div className="w-full max-w-[440px]">
+                <div className="w-full max-w-110">
                     <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#111111]">
                         {texts?.titleStart} <span className="italic font-normal text-[#5A5855]">{texts?.titleHighlight}</span> {texts?.titleEnd}
                     </h2>
                     {/* Línea divisoria estilo imprenta */}
-                    <div className="mt-4 h-[2px] w-12 bg-[#111111]" />
+                    <div className="mt-4 h-0.5 w-12 bg-[#111111]" />
                     
                     <p className="mt-6 font-serif text-base md:text-lg text-[#3A3835] leading-relaxed">
                         {texts?.description}
@@ -85,7 +85,7 @@ export const Contact = () => {
                 <form
                     action="https://formspree.io/f/mqeyqojk"
                     method="POST"
-                    className="flex w-full max-w-[440px] flex-col gap-5 rounded-2xl border border-[#EAEAE7] bg-white p-6 md:p-8 shadow-sm"
+                    className="flex w-full max-w-110 flex-col gap-5 rounded-2xl border border-[#EAEAE7] bg-white p-6 md:p-8 shadow-sm"
                 >
                     <div>
                         <label className="text-[10px] md:text-xs font-sans font-bold uppercase tracking-widest text-[#5A5855] px-1">{texts?.formNameLabel}</label>
