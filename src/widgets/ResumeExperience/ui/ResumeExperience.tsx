@@ -51,7 +51,7 @@ export const ResumeExperience = () => {
                 {experiences.map((exp) => (
                     <div key={exp.id} className="relative group">
                         {/* Nodo de la línea de tiempo - Efecto de inversión de tinta al hacer hover */}
-                        <div className="absolute -left-[48.5px] flex h-8 w-8 items-center justify-center rounded-full border border-[#111111] bg-[#F7F7F5] text-[#111111] transition-colors duration-300 group-hover:bg-[#111111] group-hover:text-[#F7F7F5]">
+                        <div className="absolute left-[48.5px] flex h-8 w-8 items-center justify-center rounded-full border border-[#111111] bg-[#F7F7F5] text-[#111111] transition-colors duration-300 group-hover:bg-[#111111] group-hover:text-[#F7F7F5]">
                             {exp.icon}
                         </div>
 

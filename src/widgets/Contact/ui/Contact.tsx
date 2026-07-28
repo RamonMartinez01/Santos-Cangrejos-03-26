@@ -6,6 +6,10 @@ import { useDictionary } from '../../../shared/i18n/api/useDictionary';
 
 export const Contact = () => {
     const [copied, setCopied] = useState(false);
+
+    // Estado para manejar el ciclo de vida de la petición del Form
+    const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
     const email = "martinezcjr1@gmail.com";
     const phoneNumber = "526671040980";
 
@@ -20,18 +24,48 @@ export const Contact = () => {
         setTimeout(() => setCopied(false), 2500);
     };
 
+    // Función interceptora del envío
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault(); // Previene la navegación síncrona
+        setStatus('submitting');
+
+        const form = e.currentTarget;
+        const data = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                setStatus('success');
+                form.reset(); // Método nativo para limpiar todos los inputs del formulario
+                setTimeout(() => setStatus('idle'), 3000); // Restaura el botón después de 3 segundos
+            } else {
+                setStatus('error');
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            setStatus('error');
+        }
+    };
+
     return (
         <section id="contact" className="relative flex min-h-screen flex-col justify-center px-4 md:px-8 pt-20">
             <div className="mx-auto flex w-full max-w-5xl flex-wrap justify-center gap-10 lg:gap-12">
 
                 {/* Columna Izquierda: Info y RRSS */}
-                <div className="w-full max-w-[440px]">
+                <div className="w-full max-w-110">
                     <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#111111]">
                         {texts?.titleStart} <span className="italic font-normal text-[#5A5855]">{texts?.titleHighlight}</span> {texts?.titleEnd}
                     </h2>
                     {/* Línea divisoria estilo imprenta */}
-                    <div className="mt-4 h-[2px] w-12 bg-[#111111]" />
-                    
+                    <div className="mt-4 h-0.5 w-12 bg-[#111111]" />
+
                     <p className="mt-6 font-serif text-base md:text-lg text-[#3A3835] leading-relaxed">
                         {texts?.description}
                     </p>
@@ -85,7 +119,8 @@ export const Contact = () => {
                 <form
                     action="https://formspree.io/f/mqeyqojk"
                     method="POST"
-                    className="flex w-full max-w-[440px] flex-col gap-5 rounded-2xl border border-[#EAEAE7] bg-white p-6 md:p-8 shadow-sm"
+                    onSubmit={handleSubmit}
+                    className="flex w-full max-w-110 flex-col gap-5 rounded-2xl border border-[#EAEAE7] bg-white p-6 md:p-8 shadow-sm"
                 >
                     <div>
                         <label className="text-[10px] md:text-xs font-sans font-bold uppercase tracking-widest text-[#5A5855] px-1">{texts?.formNameLabel}</label>
@@ -93,6 +128,7 @@ export const Contact = () => {
                             type="text"
                             name="name"
                             required
+                            disabled={status === 'submitting'}
                             placeholder={texts?.formNamePlaceholder}
                             className="mt-1.5 w-full rounded-lg border border-[#EAEAE7] bg-[#F7F7F5] px-4 py-3 text-sm font-sans text-[#111111] outline-none transition-colors placeholder:text-[#5A5855]/50 focus:border-[#111111] focus:bg-white focus:ring-1 focus:ring-[#111111]"
                         />
@@ -104,6 +140,7 @@ export const Contact = () => {
                             type="email"
                             name="email"
                             required
+                            disabled={status === 'submitting'}
                             placeholder={texts?.formEmailPlaceholder}
                             className="mt-1.5 w-full rounded-lg border border-[#EAEAE7] bg-[#F7F7F5] px-4 py-3 text-sm font-sans text-[#111111] outline-none transition-colors placeholder:text-[#5A5855]/50 focus:border-[#111111] focus:bg-white focus:ring-1 focus:ring-[#111111]"
                         />
@@ -115,6 +152,7 @@ export const Contact = () => {
                             name="message"
                             required
                             rows={4}
+                            disabled={status === 'submitting'}
                             placeholder={texts?.formMessagePlaceholder}
                             className="mt-1.5 w-full resize-none rounded-lg border border-[#EAEAE7] bg-[#F7F7F5] px-4 py-3 text-sm font-sans text-[#111111] outline-none transition-colors placeholder:text-[#5A5855]/50 focus:border-[#111111] focus:bg-white focus:ring-1 focus:ring-[#111111]"
                         />
@@ -122,10 +160,23 @@ export const Contact = () => {
 
                     <button
                         type="submit"
+                        disabled={status === 'submitting' || status === 'success'}
                         className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#111111] py-3.5 font-sans text-sm font-bold uppercase tracking-widest text-[#F7F7F5] transition-all hover:bg-[#3A3835] active:scale-[0.98]"
                     >
-                        {texts?.formSubmit}
-                        <Send size={16} strokeWidth={2} />
+                        {status === 'idle' && (
+                            <>
+                                {texts?.formSubmit}
+                                <Send size={16} strokeWidth={2} />
+                            </>
+                        )}
+                        {status === 'submitting' && 'Enviando...'}
+                        {status === 'success' && (
+                            <>
+                                Enviado
+                                <Check size={16} strokeWidth={2} />
+                            </>
+                        )}
+                        {status === 'error' && 'Error al enviar'}
                     </button>
                 </form>
 
