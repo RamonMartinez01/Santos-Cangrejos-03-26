@@ -23,7 +23,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
 
     return (
         // Tactilidad Web: Esquinas redondeadas (rounded-2xl), sombra base sutil, y elevación profunda en hover.
-        <article className="group w-full max-w-[440px] flex flex-col bg-white rounded-2xl border border-[#EAEAE7] shadow-sm overflow-hidden transition-all duration-500 hover:shadow-xl hover:border-[#EAEAE7]">
+        <article className="group w-full max-w-110 flex flex-col bg-white rounded-2xl border border-[#EAEAE7] shadow-sm overflow-hidden transition-all duration-500 hover:shadow-xl hover:border-[#EAEAE7]">
             
             {/* Cabecera visual */}
             {imageUrl && (
@@ -55,7 +55,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
             )}
 
             {/* Cuerpo del contenido - Padding ajustado: p-5 (móvil) / md:p-8 (escritorio) */}
-            <div className="flex flex-col flex-grow p-5 md:p-8">
+            <div className="flex flex-col grow p-5 md:p-8">
                 <header className="mb-4">
                     <div className="flex items-start justify-between gap-3">
                         {/* Título responsivo: text-xl (móvil) / md:text-2xl (escritorio) */}
@@ -71,7 +71,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                     </div>
                 </header>
 
-                <p className="font-serif text-[#3A3835] text-sm md:text-base leading-relaxed mb-8 flex-grow">
+                <p className="font-serif text-[#3A3835] text-sm md:text-base leading-relaxed mb-8 grow">
                     {description}
                 </p>
 
