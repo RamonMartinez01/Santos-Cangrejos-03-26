@@ -83,6 +83,20 @@ export interface UIDictionary {
         job4Date: string;
         job4Desc: string;
     };
+    projectDetailsPage: {
+        loading: string;
+        serverError: string;
+        notFound: string;
+        backToHome: string;
+        backToPortfolio: string;
+        liveDemo: string;
+        repository: string;
+        architectureTitle: string;
+        architectureEmpty: string;
+        devopsTitle: string;
+        devopsEmpty: string;
+        stackTitle: string;
+    };
 }
 
 export interface DictionaryResponse {

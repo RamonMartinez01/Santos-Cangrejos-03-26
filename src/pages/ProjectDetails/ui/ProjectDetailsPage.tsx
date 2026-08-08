@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Github, Server, Container, Database } from 'lucide-react';
-//import { useDictionary } from '../../../shared/i18n/api/useDictionary';
+import { useDictionary } from '../../../shared/i18n/api/useDictionary';
 import { useProject } from '../../../entities/Project/api/useProject';
 
 
@@ -11,10 +11,10 @@ export const ProjectDetailsPage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     
-    // 1. Consumimos el diccionario global
-    //const { data: dictionary } = useDictionary();
-    // TODO: Deberás agregar 'projectDetails' a tu UIDictionary si deseas localizar estos textos estáticos
-    
+    // 1. Consumo estricto de textos estáticos
+    const { data: dictionary } = useDictionary();
+    const texts = dictionary?.projectDetailsPage;
+
     // 2. Consumimos nuestro nuevo custom hook
     const { data: project, isLoading, error } = useProject(id);
 
@@ -28,7 +28,7 @@ export const ProjectDetailsPage = () => {
         return (
             <div className="flex min-h-screen items-center justify-center bg-[#F7F7F5]">
                 <p className="text-[#5A5855] font-sans font-semibold uppercase tracking-widest animate-pulse">
-                    Cargando especificaciones...
+                    {texts?.loading || 'Cargando...'}
                 </p>
             </div>
         );
@@ -39,10 +39,10 @@ export const ProjectDetailsPage = () => {
         return (
             <div className="flex min-h-screen flex-col items-center justify-center bg-[#F7F7F5] gap-4">
                 <p className="text-[#111111] font-serif text-lg">
-                    {error ? 'Error al contactar con el servidor' : 'Proyecto no encontrado.'}
+                    {error ? (texts?.serverError || 'Error de servidor') : (texts?.notFound || 'No encontrado')}
                 </p>
                 <button onClick={() => navigate('/')} className="text-sm font-sans font-bold uppercase tracking-widest text-[#5A5855] underline hover:text-[#111111]">
-                    Volver al inicio
+                    {texts?.backToHome || 'Volver al inicio'}
                 </button>
             </div>
         );
@@ -58,7 +58,7 @@ export const ProjectDetailsPage = () => {
                     className="inline-flex items-center gap-2 mb-8 md:mb-12 text-sm font-sans font-bold uppercase tracking-widest text-[#5A5855] transition-colors hover:text-[#111111] group"
                 >
                     <ArrowLeft size={16} strokeWidth={2.5} className="transition-transform group-hover:-translate-x-1" />
-                    Volver al portafolio
+                    {texts?.backToPortfolio || 'Volver al portafolio'}
                 </Link>
 
                 <header className="mb-16">
@@ -77,7 +77,7 @@ export const ProjectDetailsPage = () => {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 rounded-xl bg-[#111111] px-6 py-3.5 font-sans text-sm font-bold uppercase tracking-widest text-[#F7F7F5] transition-all hover:bg-[#3A3835] active:scale-[0.98]"
                             >
-                                Live Demo
+                                {texts?.liveDemo || 'Live Demo'}
                                 <ExternalLink size={16} strokeWidth={2} />
                             </a>
                         )}
@@ -88,7 +88,7 @@ export const ProjectDetailsPage = () => {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 rounded-xl bg-white border border-[#EAEAE7] px-6 py-3.5 font-sans text-sm font-bold uppercase tracking-widest text-[#111111] transition-all hover:bg-[#F7F7F5] hover:border-[#111111] active:scale-[0.98]"
                             >
-                                Repositorio
+                                {texts?.repository || 'Repositorio'}
                                 <Github size={16} strokeWidth={2} />
                             </a>
                         )}
@@ -101,10 +101,10 @@ export const ProjectDetailsPage = () => {
                         <section className="bg-white p-6 md:p-8 rounded-2xl border border-[#EAEAE7] shadow-sm">
                             <h2 className="text-xl font-serif font-bold text-[#111111] mb-4 flex items-center gap-2">
                                 <Server size={20} className="text-[#5A5855]" />
-                                Arquitectura del Sistema
+                                {texts?.architectureTitle || 'Arquitectura'}
                             </h2>
                             <p className="font-serif text-[#3A3835] leading-relaxed mb-6 whitespace-pre-wrap">
-                                {project.architecture || 'Detalles de arquitectura no disponibles.'}
+                                {project.architecture || texts?.architectureEmpty}
                             </p>
                             
                             <div className="w-full h-64 bg-[#F7F7F5] rounded-xl border border-[#EAEAE7] border-dashed flex items-center justify-center text-[#5A5855] text-sm font-sans uppercase tracking-widest">
@@ -115,10 +115,10 @@ export const ProjectDetailsPage = () => {
                         <section className="bg-white p-6 md:p-8 rounded-2xl border border-[#EAEAE7] shadow-sm">
                             <h2 className="text-xl font-serif font-bold text-[#111111] mb-4 flex items-center gap-2">
                                 <Container size={20} className="text-[#5A5855]" />
-                                DevOps & Despliegue
+                                {texts?.devopsTitle || 'DevOps'}
                             </h2>
                             <p className="font-serif text-[#3A3835] leading-relaxed whitespace-pre-wrap">
-                                {project.devops || 'Detalles de despliegue no disponibles.'}
+                                {project.devops || texts?.devopsEmpty}
                             </p>
                         </section>
                     </div>
@@ -127,7 +127,7 @@ export const ProjectDetailsPage = () => {
                         <div className="bg-white p-6 md:p-8 rounded-2xl border border-[#EAEAE7] shadow-sm">
                             <h3 className="text-sm font-sans font-bold uppercase tracking-widest text-[#111111] mb-6 flex items-center gap-2">
                                 <Database size={16} />
-                                Stack Tecnológico
+                                {texts?.stackTitle || 'Stack'}
                             </h3>
                             <ul className="flex flex-wrap gap-2">
                                 {project.tags && project.tags.map((tag) => (
