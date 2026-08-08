@@ -22,6 +22,7 @@ export interface ProjectDetails {
     description: string;
     architecture: string;
     devops: string;
+    mermaidDiagram: string;
     tags: string[];
     imageUrl: string;
     repositories: { label: string; url: string }[];

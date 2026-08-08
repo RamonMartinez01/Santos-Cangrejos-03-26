@@ -5,6 +5,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Github, Server, Container, Database } from 'lucide-react';
 import { useDictionary } from '../../../shared/i18n/api/useDictionary';
 import { useProject } from '../../../entities/Project/api/useProject';
+import { MermaidDiagram } from '../../../shared/ui/MermaidDiagram';
 
 
 export const ProjectDetailsPage = () => {
@@ -107,9 +108,12 @@ export const ProjectDetailsPage = () => {
                                 {project.architecture || texts?.architectureEmpty}
                             </p>
                             
-                            <div className="w-full h-64 bg-[#F7F7F5] rounded-xl border border-[#EAEAE7] border-dashed flex items-center justify-center text-[#5A5855] text-sm font-sans uppercase tracking-widest">
-                                [ Diagrama Mermaid.js Aquí ]
-                            </div>
+                            {/* Inyección del Sandbox Mermaid */}
+                            {project.mermaidDiagram && (
+                                <div className="mt-8">
+                                    <MermaidDiagram chart={project.mermaidDiagram} />
+                                </div>
+                            )}
                         </section>
 
                         <section className="bg-white p-6 md:p-8 rounded-2xl border border-[#EAEAE7] shadow-sm">
