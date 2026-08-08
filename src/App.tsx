@@ -4,6 +4,7 @@ import { Navbar } from '././widgets/Navbar';
 import { Home } from './pages/Home';
 import { Curriculum } from './pages/Curriculum';
 import { ScrollManager } from './shared/utils/ScrollManager';
+import { ProjectDetailsPage } from './pages/ProjectDetails/ui/ProjectDetailsPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/curriculum" element={<Curriculum />} />
+          <Route path="/projects/:id" element={<ProjectDetailsPage />} />
         </Routes>
 
         {/* 

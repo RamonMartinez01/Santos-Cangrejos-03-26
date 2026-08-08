@@ -31,6 +31,21 @@ export interface UIDictionary {
         featured: string;
         code: string;
         demo: string;
+        details: string;
+    };
+    // Define la interfaz específica para los detalles extendidos
+    ProjectDetails: {
+        id: string;
+        title: string;
+        slug: string;
+        description: string;
+        architecture: string;
+        devops: string;
+        tags: string[];
+        imageUrl: string;
+        repositories: { label: string; url: string }[];
+        liveDemoUrl: string;
+        isFeatured: boolean;
     };
     navbar: {
         home: string;
@@ -99,18 +114,18 @@ export const useDictionary = () => {
         queryKey: ['dictionary', locale],
         queryFn: async () => {
             const response = await apiClient.get<DictionaryResponse>(`/content/${locale}`);
-            
+
             // Extrae directamente la sección de UI. 
             // Lanza un error si no viene, para que TanStack lo maneje.
             if (!response['ui-dictionary']) {
                 throw new Error('Dictionary payload missing from server');
             }
-            
+
             return response['ui-dictionary'];
         },
         // Optimización agresiva: El texto de la UI no cambia mientras el usuario navega.
         // Infinity le dice a TanStack Query que JAMÁS vuelva a hacer fetch 
         // a menos que cambie el idioma (la queryKey).
-        staleTime: Infinity, 
+        staleTime: Infinity,
     });
 };
