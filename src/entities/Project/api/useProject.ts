@@ -3,27 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '../../../shared/api/apiClient';
 import { useLocaleStore } from '../../../shared/store/useLocaleStore';
-
-// Definimos la interfaz específica para los detalles extendidos
-export interface ProjectDetails {
-    id: string;
-    title: string;
-    slug: string;
-    description: string;
-    architecture: string;
-    devops: string;
-    tags: string[];
-    imageUrl: string;
-    repositories: { label: string; url: string }[];
-    liveDemoUrl: string;
-    isFeatured: boolean;
-}
-
-// Interfaz para la respuesta individual
-interface ApiSingleResponse {
-    status: string;
-    data: ProjectDetails;
-}
+import type { ProjectDetails, ApiSingleResponse } from '../model/types';
 
 /**
  * Función fetcher para un proyecto individual.
