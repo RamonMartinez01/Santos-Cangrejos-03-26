@@ -1,5 +1,6 @@
 // src/entities/Project/ui/ProjectCard.tsx
-
+import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 import type { Project } from '../model/types';
 import { useDictionary } from '../../../shared/i18n/api/useDictionary'
 
@@ -9,53 +10,55 @@ interface ProjectCardProps {
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
     const {
+        id,
         title,
         description,
         tags,
         imageUrl,
         repositories,
-        liveDemoUrl,
         isFeatured
     } = project;
 
     const { data: dictionary } = useDictionary();
     const texts = dictionary?.projectCard;
 
+    // Ruta dinámica hacia la página de detalles
+    const detailsUrl = `/projects/${id}`;
+
     return (
         // Tactilidad Web: Esquinas redondeadas (rounded-2xl), sombra base sutil, y elevación profunda en hover.
-        <article className="group w-full max-w-[440px] flex flex-col bg-white rounded-2xl border border-[#EAEAE7] shadow-sm overflow-hidden transition-all duration-500 hover:shadow-xl hover:border-[#EAEAE7]">
+        <article className="group w-full max-w-110 flex flex-col bg-white rounded-2xl border border-[#EAEAE7] shadow-sm overflow-hidden transition-all duration-500 hover:shadow-xl hover:border-[#EAEAE7]">
             
-            {/* Cabecera visual */}
+            {/* Cabecera visual (Ahora envuelta en un Link interno) */}
             {imageUrl && (
-                liveDemoUrl ? (
-                    <a
-                        href={liveDemoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block w-full h-48 overflow-hidden bg-[#EAEAE7] group/image"
-                        aria-label={`Visitar demo de ${title}`}
-                    >
-                        <img
-                            src={imageUrl}
-                            alt={`Captura de pantalla del proyecto ${title}`}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-105"
-                            loading="lazy"
-                        />
-                    </a>
-                ) : (
-                    <div className="w-full h-48 overflow-hidden bg-[#EAEAE7]">
-                        <img
-                            src={imageUrl}
-                            alt={`Captura de pantalla del proyecto ${title}`}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                        />
+                <Link
+                    to={detailsUrl}
+                    className="relative block w-full h-48 overflow-hidden bg-[#EAEAE7] group/image cursor-pointer"
+                    aria-label={`Ver detalles arquitectónicos de ${title}`}
+                >
+                    <img
+                        src={imageUrl}
+                        alt={`Captura de pantalla del proyecto ${title}`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-105"
+                        loading="lazy"
+                    />
+                    
+                    {/* Overlay: Etiqueta central y fondo oscurecido */}
+                    <div className="absolute inset-0 bg-[#111111]/10 backdrop-blur-[1px] opacity-0 transition-opacity duration-300 group-hover/image:opacity-100 flex items-center justify-center">
+                        <span className="bg-white text-[#111111] px-4 py-2 rounded-full font-sans font-bold text-[10px] md:text-xs uppercase tracking-widest translate-y-4 group-hover/image:translate-y-0 transition-all duration-300 shadow-sm">
+                            {texts?.details}
+                        </span>
                     </div>
-                )
+
+                    {/* Overlay: Círculo con flecha en la esquina superior derecha */}
+                    <div className="absolute top-4 right-4 bg-white text-[#111111] p-2 rounded-full shadow-md opacity-0 translate-y-2 group-hover/image:opacity-100 group-hover/image:translate-y-0 transition-all duration-300 delay-75">
+                        <ArrowUpRight size={18} strokeWidth={2.5} />
+                    </div>
+                </Link>
             )}
 
             {/* Cuerpo del contenido - Padding ajustado: p-5 (móvil) / md:p-8 (escritorio) */}
-            <div className="flex flex-col flex-grow p-5 md:p-8">
+            <div className="flex flex-col grow p-5 md:p-8">
                 <header className="mb-4">
                     <div className="flex items-start justify-between gap-3">
                         {/* Título responsivo: text-xl (móvil) / md:text-2xl (escritorio) */}
@@ -71,7 +74,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                     </div>
                 </header>
 
-                <p className="font-serif text-[#3A3835] text-sm md:text-base leading-relaxed mb-8 flex-grow">
+                <p className="font-serif text-[#3A3835] text-sm md:text-base leading-relaxed mb-8 grow">
                     {description}
                 </p>
 
@@ -104,17 +107,15 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                         </a>
                     ))}
                     
-                    {liveDemoUrl && texts && (
-                        <a
-                            href={liveDemoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[11px] md:text-xs font-sans font-bold uppercase tracking-widest text-[#111111] transition-colors hover:text-[#5A5855] flex items-center gap-1 ml-auto group/demo"
-                        >
-                            {texts.demo}
-                            <svg className="w-3.5 h-3.5 transition-transform group-hover/demo:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                        </a>
-                    )}
+                   {/* Botón Detalles (Reemplaza a liveDemoUrl) */}
+                    <Link
+                        to={detailsUrl}
+                        className="text-[11px] md:text-xs font-sans font-bold uppercase tracking-widest text-[#111111] transition-colors hover:text-[#5A5855] flex items-center gap-1 ml-auto group/demo"
+                    >
+                        {/* Asumimos texts.details, puedes hardcodear "Ver detalles" temporalmente */}
+                        {texts?.details}
+                        <svg className="w-3.5 h-3.5 transition-transform group-hover/demo:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    </Link>
                 </footer>
             </div>
         </article>
