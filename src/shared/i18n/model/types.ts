@@ -91,6 +91,7 @@ export interface UIDictionary {
         backToPortfolio: string;
         liveDemo: string;
         repository: string;
+        privateRepoNotice: string;
         architectureTitle: string;
         architectureEmpty: string;
         devopsTitle: string;

@@ -25,7 +25,7 @@ export interface ProjectDetails {
     mermaidDiagram: string;
     tags: string[];
     imageUrl: string;
-    repositories: { label: string; url: string }[];
+    repositories: { label: string; url: string; isPrivate?: boolean }[];
     liveDemoUrl: string;
     isFeatured: boolean;
 }
