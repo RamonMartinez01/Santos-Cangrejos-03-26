@@ -10,6 +10,7 @@ export interface Project {
     repositories?: {
         label: string;
         url: string;
+        isPrivate?: boolean;
     }[];
     liveDemoUrl: string | null;
     isFeatured: boolean;
